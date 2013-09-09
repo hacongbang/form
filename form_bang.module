@@ -1,0 +1,82 @@
+<?php
+function form_bang_menu() {
+  $items['form'] = array(
+    'title' => 'Sign up',
+    'description' => '',
+     'page callback' => 'drupal_get_form',
+    'page arguments' => array('form_bang_form'),
+    'access callback' => TRUE,
+  );
+  return $items;
+}
+function form_bang_form($form, &$form_state){
+//fieldset
+	$form['name'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Name'),
+  );
+//form textfield first name 
+$form['name']['first'] = array(
+    '#type' => 'textfield',
+    '#title' => t('First name'),
+  );
+//form  textfield 
+$form['name']['last'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Last name'),
+  );
+
+//form machine
+$form['id_user'] = array(
+  '#type' => 'machine_name',
+  '#maxlength' => 21,
+   '#title' => t('Username'),
+);
+//form pass
+$form['pass'] = array(
+  '#type' => 'password',
+  '#maxlength' => 64,
+  '#size' => 15,
+);
+//form pass confirm
+$form['pass'] = array(
+  '#type' => 'password_confirm',
+  '#size' => 25,
+);
+//form description
+$form['description'] = array(
+    '#type' => 'text_format',
+    '#title' => t('About you'),
+    '#default_value'=> 'How old are you?',
+    '#weight' => 0,
+  );
+//form checkboxes  
+$form['hoi_dap'] = array(
+		  '#type' => 'checkboxes',
+		  '#options' => drupal_map_assoc(array(t('Messi'), t('ronaldo'))),
+		  '#title' => t('Ai la cau thu hay nhat the gioi?'),
+	
+  );
+ //checkbox
+$form['checkbox'] = array(
+					  '#type' => 'checkbox',
+					  '#title' => t('Bạn có chắc với các điều khoản'),
+  );
+ // form submit 
+$form['actions']['submit'] = array(
+			'#type' => 'submit',
+			'#value' => t('Save'),
+  );
+  //form delete
+			  $form['actions']['delete'] = array(
+				'#type' => 'button',
+				'#value' => t('Delete'),
+  );
+  //form cancel
+			  $form['actions']['cancel'] = array(
+			  	'#type' => 'button',
+				'#value' => t('Cancel'),
+				'#markup' => l(t('Cancel'), 'foo/bar'),
+  );
+   return $form;
+}
